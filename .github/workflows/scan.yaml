@@ -1,0 +1,24 @@
+name: Scan
+on: [push, pull_request]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'python:3.6-slim-buster'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-slim-buster.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      # Upload works fine, but analysis fails
+      - name: Upload Trivy slim-buster scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'trivy-slim-buster.sarif'
