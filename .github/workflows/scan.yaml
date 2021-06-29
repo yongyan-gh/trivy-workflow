@@ -15,7 +15,6 @@ jobs:
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-slim-buster.sarif'
-          severity: 'CRITICAL,HIGH'
 
       # Upload works fine, but analysis fails
       - name: Upload Trivy slim-buster scan results to GitHub Security tab
