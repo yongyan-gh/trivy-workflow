@@ -1,5 +1,13 @@
 name: Scan
-on: [push, pull_request]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ master ]
+  schedule:
+    - cron: '29 12 * * 0'
+  workflow_dispatch:
 jobs:
   build:
     name: Build
