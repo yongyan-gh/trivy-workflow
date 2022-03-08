@@ -22,14 +22,14 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'python:3.6-slim-buster'
-          format: 'sarif'
-          output: 'trivy-slim-buster.sarif'
+          format: 'json'
+          output: 'trivy-slim-buster.json'
 
       - name: 'Safe trivy-indy-node-latest.sarif'
         uses: actions/upload-artifact@v2
         with:
-          name: trivy-slim-buster.sarif
-          path: trivy-slim-buster.sarif
+          name: trivy-slim-buster.json
+          path: trivy-slim-buster.json
           retention-days: 8
       
       - name: Upload Trivy scan results to GitHub Security tab
